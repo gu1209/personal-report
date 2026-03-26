@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ── Scroll progress bar ─────────────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #6366f1, #3b82f6);
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 300;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+}
+
+@keyframes progressShimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ── Scroll-triggered fade-in animations ────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.animate-on-scroll[data-visible] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Animated gradient text ─────────────────────────────────────────── */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text-animated {
+  background: linear-gradient(270deg, #3b82f6, #6366f1, #1d4ed8, #3b82f6);
+  background-size: 300% 300%;
+  animation: gradientShift 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* ── Typing cursor ───────────────────────────────────────────────────── */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  -webkit-text-fill-color: #3b82f6;
+  color: #3b82f6;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Float animation for profile photo ──────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animate {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ── Card glow on hover ─────────────────────────────────────────────── */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.25s ease !important;
+}
+.card-glow:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.12), 0 12px 35px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-3px) !important;
+  border-color: rgb(191 219 254) !important;
+}
+
+/* ── Skill tag hover lift ────────────────────────────────────────────── */
+.skill-tag-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease !important;
+}
+.skill-tag-hover:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.18);
+}
+
+/* ── Nav link active underline ───────────────────────────────────────── */
+.nav-link-active {
+  color: #2563eb !important;
+}
+
+/* ── Hero stat chip hover ────────────────────────────────────────────── */
+.stat-chip {
+  transition: all 0.2s ease;
+}
+.stat-chip:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.1);
+}
+
+/* ── Print resume (mobile-friendly: no window.open needed) ────────────── */
+#resume-print-root {
+  display: none;
+}
+@media print {
+  /* Hide everything on the page */
+  body > * {
+    display: none !important;
+  }
+  /* Show only the resume content */
+  #resume-print-root {
+    display: block !important;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: auto;
+  }
+  /* Force browsers to print images in full color (off by default in many browsers) */
+  #resume-print-root img {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}
+
+/* ── Admin mode editable fields ───────────────────────────────────────── */
+.admin-mode [data-admin-field] {
+  outline: 1.5px dashed #f59e0b;
+  border-radius: 3px;
+  background: rgba(253, 224, 71, 0.12);
+  cursor: text;
+  min-width: 4px;
+  display: inline;
+}
+.admin-mode [data-admin-field]:hover {
+  background: rgba(253, 224, 71, 0.25);
+  outline-color: #d97706;
+}
+.admin-mode [data-admin-field]:focus {
+  background: rgba(253, 224, 71, 0.35);
+  outline: 2px solid #d97706;
+}
+
+/* ── Accordion expand animation */
+.accordion-body {
+  animation: accordionOpen 0.25s ease forwards;
+}
+
+@keyframes accordionOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Dark mode overrides ───────────────────────────────────────────────── */
+.dark { color-scheme: dark; }
+.dark body { background-color: #0f172a; }
+.dark nav { background-color: rgba(15,23,42,0.9) !important; border-color: #1e293b !important; }
+
+/* Backgrounds */
+.dark .bg-white    { background-color: #1e293b !important; }
+.dark .bg-white\/80 { background-color: rgba(15,23,42,0.85) !important; }
+.dark .bg-white\/95 { background-color: rgba(15,23,42,0.97) !important; }
+.dark .bg-white\/10 { background-color: rgba(255,255,255,0.05) !important; }
+.dark .bg-white\/20 { background-color: rgba(255,255,255,0.08) !important; }
+.dark .bg-gray-50  { background-color: #111827 !important; }
+.dark .bg-gray-100 { background-color: #1f2937 !important; }
+.dark .bg-black\/60 { background-color: rgba(0,0,0,0.8) !important; }
+/* opacity-modifier bg — Tailwind generates these with escaped slash */
+.dark .bg-gray-50\/50 { background-color: rgba(17,24,39,0.5) !important; }
+.dark .bg-gray-50\/30 { background-color: rgba(17,24,39,0.3) !important; }
+.dark .bg-primary-50  { background-color: rgba(30,58,138,0.25) !important; }
+.dark .bg-primary-50\/30 { background-color: rgba(30,58,138,0.15) !important; }
+
+/* Text */
+.dark .text-gray-900 { color: #f1f5f9 !important; }
+.dark .text-gray-800 { color: #e2e8f0 !important; }
+.dark .text-gray-700 { color: #cbd5e1 !important; }
+.dark .text-gray-600 { color: #94a3b8 !important; }
+.dark .text-gray-500 { color: #64748b !important; }
+.dark .text-gray-400 { color: #475569 !important; }
+
+/* Borders */
+.dark .border-gray-100 { border-color: #1e293b !important; }
+.dark .border-gray-200 { border-color: #334155 !important; }
+.dark .border-gray-300 { border-color: #475569 !important; }
+.dark .border-primary-100 { border-color: rgba(59,130,246,0.2) !important; }
+.dark .border-primary-200 { border-color: rgba(59,130,246,0.3) !important; }
+.dark .ring-gray-300 { --tw-ring-color: #334155; }
+
+/* Inputs */
+.dark input:not([type="checkbox"]):not([type="range"]),
+.dark textarea,
+.dark select {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+.dark input::placeholder, .dark textarea::placeholder { color: #475569 !important; }
+
+/* Shadows — lighten for dark bg */
+.dark .shadow-sm  { box-shadow: 0 1px 4px rgba(0,0,0,0.5) !important; }
+.dark .shadow-md  { box-shadow: 0 4px 14px rgba(0,0,0,0.6) !important; }
+.dark .shadow-xl  { box-shadow: 0 10px 30px rgba(0,0,0,0.7) !important; }
+.dark .shadow-2xl { box-shadow: 0 25px 60px rgba(0,0,0,0.8) !important; }
+
+/* ── Cursor sparkle ────────────────────────────────────────────────────── */
+.cursor-star {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #60a5fa;
+  animation: starFade 0.65s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+@keyframes starFade {
+  0%   { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0;   transform: translate(-50%, -50%) scale(0.2) translateY(-12px); }
+}
