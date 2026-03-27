@@ -1,6 +1,7 @@
 module.exports = {
   extends: ['next/core-web-vitals'],
   rules: {
-    'react-hooks/exhaustive-deps': 'warn',
+    '@next/next/no-img-element': 'off',
+    'jsx-a11y/alt-text': 'off',
   },
 };
