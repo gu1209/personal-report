@@ -13,36 +13,37 @@ interface Props {
 // ── Font stacks ──────────────────────────────────────────────────────────
 const SONG = "'SimSun','STSong','NSimSun','Times New Roman',serif";
 const HEI  = "'SimHei','STHeiti','Microsoft YaHei Black',sans-serif";
-const TJU_BLUE = '#00518e'; // from tju_logo.svg: rgb(0%, 31.76%, 55.69%)
+const TJU_BLUE = '#1a56db'; // primary blue — customise as needed
 const SEP_W = '1.5pt';     // shared thickness: section underlines + contact separators
 
-// ── Education data ────────────────────────────────────────────────────────
+// ── Education data ──────────────────────────────────────────────────────────
 const EDU = {
   master: {
-    school:  { zh: '天津大学（985）',         en: 'Tianjin University (985)' },
-    major:   { zh: '金融',                    en: 'Finance' },
-    degree:  { zh: '硕士',                    en: 'Master' },
-    period:  '2024.09-2027.01',
-    gpa:     { zh: 'GPA：92.21（专业前10%），**天津大学二等学业奖学金**', en: 'GPA: 92.21 (Top 10%), **Second-class Academic Scholarship**' },
-    courses: { zh: '主修课程：**大数据与金融风险**、金融随机分析、**金融数据分析**、衍生金融工具、公司金融', en: 'Key Courses: **Big Data & Financial Risk**, Financial Stochastic Analysis, **Financial Data Analysis**, Derivatives, Corporate Finance' },
+    school:  { zh: '你的硕士学校',     en: 'Your Graduate University' },
+    major:   { zh: '你的专业',         en: 'Your Major' },
+    degree:  { zh: '硕士',             en: 'Master' },
+    period:  '20xx.09-20xx.06',
+    gpa:     { zh: 'GPA：填写你的GPA', en: 'GPA: your GPA' },
+    courses: { zh: '主修课程：填写你的课程', en: 'Key Courses: your courses' },
   },
   bachelor: {
-    school:  { zh: '中国矿业大学（211）',       en: 'China University of Mining & Technology (211)' },
-    major:   { zh: '金融',                    en: 'Finance' },
-    degree:  { zh: '本科',                    en: 'Bachelor' },
-    period:  '2020.09-2024.06',
-    gpa:     { zh: 'GPA：4.15（专业前15%），中国矿业大学二等学业奖学金', en: 'GPA: 4.15 (Top 15%), Second-class Academic Scholarship' },
-    courses: { zh: '主修课程：**金融数据分析**、宏观经济学、微观经济学、**Python数据分析**、金融经济学、证券投资', en: 'Key Courses: **Financial Data Analysis**, Macroeconomics, Microeconomics, **Python Data Analysis**, Financial Economics, Securities Investment' },
+    school:  { zh: '你的本科学校',     en: 'Your Undergraduate University' },
+    major:   { zh: '你的专业',         en: 'Your Major' },
+    degree:  { zh: '本科',             en: 'Bachelor' },
+    period:  '20xx.09-20xx.06',
+    gpa:     { zh: 'GPA：填写你的GPA', en: 'GPA: your GPA' },
+    courses: { zh: '主修课程：填写你的课程', en: 'Key Courses: your courses' },
   },
 };
 
-// ── Skills data ─────────────────────────────────────────────────────────
+// ── Skills data ─────────────────────────────────────────────────────────────
 const SKILLS_ZH = [
-  { topic: '数据获取与分析能力', body: '熟练掌握Python（Pandas/NumPy/Scikit-learn/BERT）进行数据清洗与机器学习建模；能够通过Wind、Choice等金融终端获取专业数据，具备多源数据整合与清洗能力；可运用MySQL进行数据查询与管理；熟悉使用Scikit-learn进行机器学习建模。' },
-  { topic: 'AI应用能力', body: '熟练借助Coze、Claude Code等AI工具搭建智能体与自动化Skill，具备清晰的Prompt设计能力，能高效实现代码生成、流程自动化与金融场景LLM应用。' },
-  { topic: '软件技能', body: '精通MS Office（Excel数据透视表/VLOOKUP/图表），掌握Power BI数据可视化，熟练使用Jira/Confluence进行项目管理，掌握SQL与VBA自动化。' },
-  { topic: '专业资质', body: 'CPA：通过会计、财管、经济法、战略风管（4科）；CTA：通过财会、税法一、税法二、涉税实务（4科）；初级会计资格证；基金从业资格。' },
-  { topic: '语言能力', body: '英语六级（CET-6），能熟练阅读英文行业报告，胜任工作场景下的口语交流。' },
+  { topic: '专业技能', body: '在这里填写你的专业技能描述。' },
+  { topic: '语言能力', body: '在这里填写你的语言能力。' },
+];
+const SKILLS_EN = [
+  { topic: 'Professional Skills', body: 'Describe your professional skills here.' },
+  { topic: 'Language', body: 'Describe your language skills here.' },
 ];
 const SKILLS_EN = [
   { topic: 'Data Analytics', body: 'Proficient in Python (Pandas/NumPy/Scikit-learn/BERT) for data processing and ML modeling; Wind/Choice financial terminals; MySQL for data management.' },
@@ -124,7 +125,7 @@ function ResumePreview({
   const projList = projects.filter((_, i) => selectedProjects.has(i));
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const sf = (section: keyof SectionFs, delta = 0) => `${fontSize + sectionFs[section] + delta}pt`;
-  const effectiveLogoUrl = logoUrl || `${origin}/logos/tju_logo.svg`;
+  const effectiveLogoUrl = logoUrl || `${origin}/logos/favicon.svg`;
 
   // ── Preload images as base64 data URLs ────────────────────────────────
   // Fixes: (1) browser print skips network images on some PCs
@@ -176,7 +177,7 @@ function ResumePreview({
     }
 
     // Load logo — convert SVG to PNG for html2canvas compatibility
-    const logoSrc = logoUrl || (origin ? `${origin}/logos/tju_logo.svg` : '');
+    const logoSrc = logoUrl || (origin ? `${origin}/logos/favicon.svg` : '');
     if (logoSrc) {
       toDataUrl(logoSrc)
         .then(dataUrl => {
