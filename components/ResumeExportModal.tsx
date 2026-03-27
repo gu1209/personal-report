@@ -45,13 +45,6 @@ const SKILLS_EN = [
   { topic: 'Professional Skills', body: 'Describe your professional skills here.' },
   { topic: 'Language', body: 'Describe your language skills here.' },
 ];
-const SKILLS_EN = [
-  { topic: 'Data Analytics', body: 'Proficient in Python (Pandas/NumPy/Scikit-learn/BERT) for data processing and ML modeling; Wind/Choice financial terminals; MySQL for data management.' },
-  { topic: 'AI Applications', body: 'Skilled in building AI agents and automation skills with Coze and Claude Code; clear prompt engineering for LLM applications in financial scenarios.' },
-  { topic: 'Software Skills', body: 'Proficient in MS Office (Excel pivot/VLOOKUP/charts), Power BI, Jira/Confluence for project management, SQL and VBA automation.' },
-  { topic: 'Certifications', body: 'CPA: 4 subjects (Accounting, Financial Mgmt, Economic Law, Strategy); CTA: 4 subjects; Junior Accounting Certificate; Fund Practitioner Certificate.' },
-  { topic: 'Languages', body: 'CET-6 English — proficient reading of industry reports and professional oral communication.' },
-];
 
 // ── Bold parser: **text** → <strong> with 黑体 font ────────────────────
 function Bold({ text, bodySize }: { text: string; bodySize: string }) {
