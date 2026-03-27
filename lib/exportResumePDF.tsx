@@ -23,7 +23,7 @@ export async function exportResumeToPDF(experiences?: any[], projects?: any[]) {
       role:     p.subtitle || '',
       name:     p.title || p.titleEn || '',
       duration: p.period || '',
-      highlights: [
+      details: [
         ...(p.objective ? [{ title: '目标', content: p.objective }] : []),
         ...(p.findings  ? [{ title: '成果', content: p.findings  }] : []),
       ],
