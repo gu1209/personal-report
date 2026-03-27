@@ -30,7 +30,7 @@ export async function exportResumeToPDF(experiences?: any[], projects?: any[]) {
     })),
     skills: [],
   };
-  const blob = await pdf(<ResumePDF data={data} language="zh" />).toBlob();
+  const blob = await pdf(<ResumePDF data={data} />).toBlob();
   saveAs(blob, 'resume.pdf');
 }
 
