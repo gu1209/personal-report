@@ -6,14 +6,28 @@ import { ResumePDF } from './ResumePDFGenerator';
 export async function exportResumeToPDF(experiences?: any[], projects?: any[]) {
   const data = {
     basic: {
-      name: 'Your Name', nameEn: 'Your Name',
-      title: 'Your Title', email: 'your@email.com',
-      phone: '', github: '',
-      university: 'Your University', degree: 'Your Degree',
-      period: '20xx - 20xx', gpa: '',
+      name: 'Your Name',
+      jobTitle: 'Your Title',
+      phone: '',
+      email: 'your@email.com',
+      location: '',
     },
-    experiences: experiences || [],
-    projects: projects || [],
+    education: [],
+    experiences: (experiences || []).map((exp: any) => ({
+      position: exp.role || exp.roleEn || '',
+      company:  exp.company || exp.companyEn || '',
+      duration: exp.period || '',
+      highlights: (exp.highlights || []).map((h: string) => ({ title: '', content: h })),
+    })),
+    projects: (projects || []).map((p: any) => ({
+      role:     p.subtitle || '',
+      name:     p.title || p.titleEn || '',
+      duration: p.period || '',
+      highlights: [
+        ...(p.objective ? [{ title: '目标', content: p.objective }] : []),
+        ...(p.findings  ? [{ title: '成果', content: p.findings  }] : []),
+      ],
+    })),
     skills: [],
   };
   const blob = await pdf(<ResumePDF data={data} language="zh" />).toBlob();
