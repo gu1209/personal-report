@@ -6,7 +6,7 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import { ResumePDF } from './ResumePDFGenerator';
 
-export async function exportResumePDF() {
+export async function exportResumeToPDF() {
   const data = {
     basic: {
       name: 'Your Name',
@@ -28,3 +28,6 @@ export async function exportResumePDF() {
   const blob = await pdf(<ResumePDF data={data} language="zh" />).toBlob();
   saveAs(blob, 'resume.pdf');
 }
+
+// Alias for backwards compatibility
+export const exportResumePDF = exportResumeToPDF;
