@@ -3,15 +3,32 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Your Name | Portfolio",
-  description: "Personal portfolio website.",
+  description: "Personal portfolio — finance, technology, data analytics.",
+  keywords: ["Portfolio", "Finance", "Data Analytics", "Python", "Quantitative"],
   authors: [{ name: "Your Name" }],
-  icons: { icon: "/favicon.svg" },
+  creator: "Your Name",
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    title: "Your Name | Portfolio",
+    description: "Personal portfolio — finance, technology, data analytics.",
+    siteName: "Your Portfolio",
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <body className="antialiased min-h-screen bg-white">{children}</body>
+    <html lang="zh">
+      <body className="antialiased min-h-screen bg-white">
+        {children}
+      </body>
     </html>
   );
 }
